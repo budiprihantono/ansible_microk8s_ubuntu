@@ -1,0 +1,6 @@
+microk8s_version: 1.27
+
+##CUSTOM_CERTIFICATE##
+SNAP: /snap/microk8s/current
+SNAP_DATA: /var/snap/microk8s/current
+OPENSSL_CONF: /snap/microk8s/current/etc/ssl/openssl.cnf
