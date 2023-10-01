@@ -20,17 +20,18 @@
     name: microk8s
     classic: yes
     channel: "{{ microk8s_version }}"
+    state: present
 
-- name: Wait for microk8s to be ready
-  become: yes
-  command: microk8s.status --wait-ready
-  changed_when: false
-  register: mk8sstatusout
-  failed_when:
-      - "'This MicroK8s deployment is acting as a node in a cluster.' not in mk8sstatusout.stdout_lines"
-      - mk8sstatusout.rc > 0
+# - name: Wait for microk8s to be ready
+#   become: yes
+#   command: microk8s.status --wait-ready
+#   changed_when: false
+#   register: mk8sstatusout
+#   failed_when:
+#       - "'This MicroK8s deployment is acting as a node in a cluster.' not in mk8sstatusout.stdout_lines"
+#       - mk8sstatusout.rc > 0
 
-- name: Add ubuntu user to microk8s group
+- name: Add   user to microk8s group
   user:
     name: "{{ ansible_ssh_user }}"
     groups: microk8s
@@ -48,9 +49,9 @@
   changed_when: false
   register: aliashelmout
 
-- name: Enable microk8s addons
-  shell: |
-        microk8s enable dns:1.1.1.1 storage ingress metrics-server
+# - name: Enable microk8s addons
+#   shell: |
+#         microk8s enable dns:1.1.1.1 ingress metrics-server
 
 - name: custom cert server.key 10 years
   become: yes
